@@ -1,4 +1,4 @@
-package collegue.api.entite;
+package colleguesapi.colleguesapispringboot.entite;
 
 public class Collegue {
 	

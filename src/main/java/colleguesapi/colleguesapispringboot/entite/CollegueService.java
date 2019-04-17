@@ -1,4 +1,4 @@
-package collegue.api.entite;
+package colleguesapi.colleguesapispringboot.entite;
 
 import java.util.ArrayList;
 import java.util.Collection;
