@@ -17,6 +17,8 @@ import colleguesapi.colleguesapispringboot.entite.CollegueService;
 public class CollegueController {
 	
 	private CollegueService colService = new CollegueService();
+	
+	//1----API - Recherche de collègues par nom
 
 	@RequestMapping(method = RequestMethod.GET)
 	public List<String> trouverNom(@RequestParam("nom") String nomSaisiDansRequete) {
@@ -38,11 +40,12 @@ public class CollegueController {
 				
     }
 	
+	
+	// 2-----API - Informations d'un collègue
+	
 		//Récupérer une information dans le chemin de la requête avec le @pathvariable
 
 	    @RequestMapping(path = "/{matricule}", method = RequestMethod.GET)
-	    
-	    
 	    public Collegue trouverMatricule(@PathVariable String matricule) throws Exception {
 	    	
 	    	
@@ -51,12 +54,33 @@ public class CollegueController {
 			return matriculefound;	
 	    
 	    }
+	    
+	    //3---------API - Création d'un collègue
 	
+	    public Collegue ajouterUnCollegue(Collegue collegueAAjouter) {
+	    	
+	    	
+	    	//Collegue nouveauCollegue = new Collegue(matricule, nom, prenoms, email, dateDeNaissance, photoUrl);
+			
 
+	        // TODO Vérifier que le nom et les prenoms ont chacun au moins 2 caractères
+	        // TODO Vérifier que l'email a au moins 3 caractères et contient `@`
+	        // TODO Vérifier que la photoUrl commence bien par `http`
+	        // TODO Vérifier que la date de naissance correspond à un age >= 18
+	        // TODO Si une des règles ci-dessus n'est pas valide, générer une exception :
+	        // `CollegueInvalideException`.
+
+
+	        // TODO générer un matricule pour ce collègue (`UUID.randomUUID().toString()`)
+
+	        // TODO Sauvegarder le collègue
+	    	
+	    	
+	    	
+	    	return collegueAAjouter;
+	    }
 	
-				
-	
-	   
+	  
 	}
 
 	
