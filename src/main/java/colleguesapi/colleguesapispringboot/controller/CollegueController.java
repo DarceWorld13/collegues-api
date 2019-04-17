@@ -3,6 +3,7 @@ package colleguesapi.colleguesapispringboot.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,10 +37,28 @@ public class CollegueController {
 		return matriculeTrouve; 
 				
     }
+	
+		//Récupérer une information dans le chemin de la requête avec le @pathvariable
+
+	    @RequestMapping(path = "/{matricule}", method = RequestMethod.GET)
+	    
+	    
+	    public Collegue trouverMatricule(@PathVariable String matricule) throws Exception {
+	    	
+	    	
+	    	Collegue matriculefound = colService.rechercherParMatricule(matricule); 
+	    	
+			return matriculefound;	
+	    
+	    }
+	
+
+	
 				
 	
 	   
 	}
+
 	
 	
 	

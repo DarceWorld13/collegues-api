@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import colleguesapi.colleguesapispringboot.exception.CollegueNonTrouveException;
+
 public class CollegueService {
 
 	Map<String, Collegue> data = new HashMap<>();
@@ -31,24 +33,41 @@ public class CollegueService {
 
 	public List<Collegue> rechercherParNom(String nomRecherche) {
 
-
-		//on crée une liste de collègue trouvée
+		// on crée une liste de collègue trouvée
 		List<Collegue> listeColleguesTrouves = new ArrayList<Collegue>();
-		
-		//on trouve toute la liste 
+
+		// on trouve toute la liste
 		Collection<Collegue> listeCollegues = this.data.values();
-		
-		//on boucle sur toute la liste pour ajouter le collègue trouvé dans notre liste vide
+
+		// on boucle sur toute la liste pour ajouter le collègue trouvé dans notre liste
+		// vide
 
 		for (Collegue collegue : listeCollegues) {
 
-			if(collegue.getNom().equals(nomRecherche)) {
+			if (collegue.getNom().equals(nomRecherche)) {
 				listeColleguesTrouves.add(collegue);
 			}
-			
+
 		}
-		//on retourne ensuite la liste alimentée
+		// on retourne ensuite la liste alimentée
 		return listeColleguesTrouves;
+
+	}
+
+	public Collegue rechercherParMatricule(String matriculeRecherche) throws Exception {
+		
+		//on va simplement récupérer le matricule du collègue directement à travers le get 
+
+		Collegue collegue1 = this.data.get(matriculeRecherche);
+		//lorsque le matricule est trouvé, on retourne notre collègue, sinon on génère une exception
+
+		if (collegue1 == null) {
+
+			throw new CollegueNonTrouveException("ce matricule n'existe pas");
+		} else {
+
+			return collegue1;
+		}
 
 	}
 
