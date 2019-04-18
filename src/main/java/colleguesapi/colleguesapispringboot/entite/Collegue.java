@@ -12,6 +12,11 @@ public class Collegue {
     private LocalDate dateDeNaissance; 
     private String photoUrl;
   
+    public Collegue ()
+    {
+    	
+    }
+    
 	public Collegue(String matricule, String nom, String prenoms, String email, LocalDate dateDeNaissance,
 			String photoUrl) {
 		super();

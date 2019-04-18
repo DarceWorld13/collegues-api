@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,13 +14,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import colleguesapi.colleguesapispringboot.entite.Collegue;
+import colleguesapi.colleguesapispringboot.entite.CollegueAModifier;
 import colleguesapi.colleguesapispringboot.entite.CollegueService;
+import colleguesapi.colleguesapispringboot.exception.CollegueInvalideException;
 
 @RestController
 @RequestMapping("/collegues")
 public class CollegueController {
 	
-	private CollegueService colService = new CollegueService();
+	//permet  de nous instancier notre objet CollegueService 
+	@Autowired
+	private CollegueService colService; 
 	
 	//1----API - Recherche de collègues par nom
 
@@ -72,11 +77,26 @@ public class CollegueController {
 	    
 	    }
 	    
+	   /// 4------------API - Mise à jour d'un collègue
 	    
 	    
-	    
-	  
-	
+	   @RequestMapping(path = "/{matricule}", method = RequestMethod.PATCH)
+	    public Collegue modifierEmailPhoto(@PathVariable String matricule, @RequestBody CollegueAModifier c) {
+	    	
+	   if( c.getEmail() != null) {
+		   Collegue hugo =  colService.modifierEmail(matricule, c.getEmail()); 
+		   return hugo;
+	   }
+	   
+	  if(c.getPhotoUrl() !=null) {
+	    	 Collegue hugo =  colService.modifierPhoto(matricule, c.getPhotoUrl());
+	    	 return hugo;
+	    }
+
+	    throw new CollegueInvalideException("héé");
+	     
+
+	   }
 	  
 	}
 
