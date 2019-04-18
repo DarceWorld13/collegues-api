@@ -1,5 +1,7 @@
 package colleguesapi.colleguesapispringboot.entite;
 
+import java.time.LocalDate;
+
 public class Collegue {
 	
 
@@ -7,10 +9,10 @@ public class Collegue {
     private String nom; 
     private String prenoms; 
     private String email;
-    private String dateDeNaissance; 
+    private LocalDate dateDeNaissance; 
     private String photoUrl;
   
-	public Collegue(String matricule, String nom, String prenoms, String email, String dateDeNaissance,
+	public Collegue(String matricule, String nom, String prenoms, String email, LocalDate dateDeNaissance,
 			String photoUrl) {
 		super();
 		this.matricule = matricule;
@@ -45,10 +47,10 @@ public class Collegue {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getDateDeNaissance() {
+	public LocalDate getDateDeNaissance() {
 		return dateDeNaissance;
 	}
-	public void setDateDeNaissance(String dateDeNaissance) {
+	public void setDateDeNaissance(LocalDate dateDeNaissance) {
 		this.dateDeNaissance = dateDeNaissance;
 	}
 	public String getPhotoUrl() {
@@ -56,7 +58,9 @@ public class Collegue {
 	}
 	public void setPhotoUrl(String photoUrl) {
 		this.photoUrl = photoUrl;
-	} 
+	}
+
+	
     
     
 

@@ -1,5 +1,7 @@
 package colleguesapi.colleguesapispringboot.entite;
 
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import colleguesapi.colleguesapispringboot.exception.CollegueInvalideException;
 import colleguesapi.colleguesapispringboot.exception.CollegueNonTrouveException;
 
 public class CollegueService {
@@ -23,11 +26,13 @@ public class CollegueService {
 		String a = UUID.randomUUID().toString();
 		String b = UUID.randomUUID().toString();
 		String c = UUID.randomUUID().toString();
-		data.put(a,
-				new Collegue(a, "Dupont", "Vincent", "dupont@example.fr", "15/06/1990", "https://fakeimg.pl/250x100/"));
-		data.put(b, new Collegue(b, "Delièvre", "Alex", "delievre@example.fr", "15/06/1995",
-				"https://fakeimg.pl/250x100/"));
-		data.put(c, new Collegue(c, "DEM", "Amadou", "dem@example.fr", "15/06/1990", "https://fakeimg.pl/250x100/"));
+		String d = UUID.randomUUID().toString();
+		
+		data.put(a,new Collegue(a, "Dupont", "Vincent", "dupont@example.fr", LocalDate.of(1990, Month.JANUARY, 03), "https://fakeimg.pl/250x100/"));
+		data.put(b, new Collegue(b, "Delièvre", "Alex", "delievre@example.fr", LocalDate.of(1996, Month.DECEMBER, 03),"https://fakeimg.pl/250x100/"));
+		data.put(c, new Collegue(c, "DEM", "Amadou", "dem@example.fr", LocalDate.of(1993, Month.FEBRUARY, 05), "https://fakeimg.pl/250x100/"));
+		
+	//	this.sauvegarderCollegue(new Collegue(d, "Mcgregor", "Conor", "conormcgregor@mcgregor.com", LocalDate.of(1989, Month.APRIL, 03), "http://google.fr"));
 
 	}
 
@@ -70,5 +75,23 @@ public class CollegueService {
 		}
 
 	}
+	
+	public Collegue sauvegarderCollegue(Collegue individu) {
+		//je crée un matricule 
+		String f = UUID.randomUUID().toString();
+		//j'ajoute ce matricule à mon individu
+		individu.setMatricule(f);
+		
+		if(individu.getNom().length()> 2 &&individu.getEmail().contains("@") && individu.getPhotoUrl().startsWith("http") && (LocalDate.now().getYear()-individu.getDateDeNaissance().getYear()>18)) {
+			//ici j'obtiens mon individu qui a son matricule à jour
+			data.put(individu.getMatricule(), individu);
+			//important 
+			return individu;
+		}else {
+			
+			throw new CollegueInvalideException("Ce collègue ne peut être ajouter"); 
+		}
+	}
+	
 
 }
