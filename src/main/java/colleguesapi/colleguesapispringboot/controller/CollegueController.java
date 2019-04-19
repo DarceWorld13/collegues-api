@@ -34,10 +34,10 @@ public class CollegueController {
 		//on crée une liste vide pour pouvoir stocker la liste de matricule, car notre methode renvoie une liste de String 
 		 List<String> matriculeTrouve = new ArrayList<>(); 
 		 
-		 //on retrouve toute notre liste de collègues trouvée en instanciant collègue service via l'appel de méthode rechercherparNom en entrant en paramètre notre variable qu'on met en paramètre
+		 //on retrouve toute notre liste de collègues trouvée en instanciant collègue service via l'appel de méthode rechercherparNom en entrant en paramètre 
 		List<Collegue> listeColleguesTrouves = colService.rechercherParNom(nomSaisiDansRequete);
 		
-		//on intère sur toute la liste pour pouvoir ajouter dans notre liste de matricule les matricules trouvées
+		//on itère sur toute la liste pour pouvoir ajouter dans notre liste de matricule les matricules trouvées
 		for (Collegue collegue : listeColleguesTrouves) {
 			
 			matriculeTrouve.add(collegue.getMatricule()); 
@@ -57,9 +57,9 @@ public class CollegueController {
 	    public Collegue trouverMatricule(@PathVariable String matricule) throws Exception {
 	    	
 	    	
-	    	Collegue matriculefound = colService.rechercherParMatricule(matricule); 
+	    	Collegue colleguefound = colService.rechercherParMatricule(matricule); 
 	    	
-			return matriculefound;	
+			return colleguefound;	
 	    
 	    }
 	    
@@ -84,13 +84,13 @@ public class CollegueController {
 	    public Collegue modifierEmailPhoto(@PathVariable String matricule, @RequestBody CollegueAModifier c) {
 	    	
 	   if( c.getEmail() != null) {
-		   Collegue hugo =  colService.modifierEmail(matricule, c.getEmail()); 
-		   return hugo;
+		   Collegue amadou =  colService.modifierEmail(matricule, c.getEmail()); 
+		   return amadou;
 	   }
 	   
 	  if(c.getPhotoUrl() !=null) {
-	    	 Collegue hugo =  colService.modifierPhoto(matricule, c.getPhotoUrl());
-	    	 return hugo;
+	    	 Collegue amadou =  colService.modifierPhoto(matricule, c.getPhotoUrl());
+	    	 return amadou;
 	    }
 
 	    throw new CollegueInvalideException("héé");

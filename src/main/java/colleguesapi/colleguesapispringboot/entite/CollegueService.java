@@ -38,10 +38,6 @@ public class CollegueService {
 		data.put(c, new Collegue(c, "DEM", "Amadou", "dem@example.fr", LocalDate.of(1993, Month.FEBRUARY, 05),
 				"https://fakeimg.pl/250x100/"));
 
-		// this.sauvegarderCollegue(new Collegue(d, "Mcgregor", "Conor",
-		// "conormcgregor@mcgregor.com", LocalDate.of(1989, Month.APRIL, 03),
-		// "http://google.fr"));
-
 	}
 
 	public List<Collegue> rechercherParNom(String nomRecherche) {
