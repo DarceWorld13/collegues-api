@@ -79,7 +79,7 @@ public class CollegueController {
 	    
 	   /// 4------------API - Mise à jour d'un collègue
 	    
-	    
+    
 	   @RequestMapping(path = "/{matricule}", method = RequestMethod.PATCH)
 	    public Collegue modifierEmailPhoto(@PathVariable String matricule, @RequestBody CollegueAModifier c) {
 	    	

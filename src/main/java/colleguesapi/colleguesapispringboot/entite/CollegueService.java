@@ -7,8 +7,13 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
+import org.hibernate.cfg.ExtendsQueueEntry;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,69 +22,49 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import colleguesapi.colleguesapispringboot.exception.CollegueInvalideException;
 import colleguesapi.colleguesapispringboot.exception.CollegueNonTrouveException;
+import colleguesapi.colleguesapispringboot.interfaceI.CollegueRepository;
 
 //transformant en spring bean
+
 @Service
 public class CollegueService {
 
-	Map<String, Collegue> data = new HashMap<>();
 
-	public CollegueService() {
+	// outils qui permet de communiquer avec une base de données relationnelle et les infos de la base se trouve dans application.properties
+	CollegueRepository pRepo;
+	
+	
 
-		String a = UUID.randomUUID().toString();
-		String b = UUID.randomUUID().toString();
-		String c = UUID.randomUUID().toString();
-		String d = UUID.randomUUID().toString();
+	public CollegueRepository getpRepo() {
+		return pRepo;
+	}
 
-		data.put(a, new Collegue(a, "Dupont", "Vincent", "dupont@example.fr", LocalDate.of(1990, Month.JANUARY, 03),
-				"https://fakeimg.pl/250x100/"));
-		data.put(b, new Collegue(b, "Delièvre", "Alex", "delievre@example.fr", LocalDate.of(1996, Month.DECEMBER, 03),
-				"https://fakeimg.pl/250x100/"));
-		data.put(c, new Collegue(c, "DEM", "Amadou", "dem@example.fr", LocalDate.of(1993, Month.FEBRUARY, 05),
-				"https://fakeimg.pl/250x100/"));
+	public void setpRepo(CollegueRepository pRepo) {
+		this.pRepo = pRepo;
+	}
 
+	@Autowired 
+	public CollegueService(CollegueRepository pRepo) {
+		super();
+		this.pRepo = pRepo;
 	}
 
 	public List<Collegue> rechercherParNom(String nomRecherche) {
-
-		// on crée une liste de collègue trouvée
-		List<Collegue> listeColleguesTrouves = new ArrayList<Collegue>();
-
-		// on trouve toute la liste
-		Collection<Collegue> listeCollegues = this.data.values();
-
-		// on boucle sur toute la liste pour ajouter le collègue trouvé dans notre liste
-		// vide
-
-		for (Collegue collegue : listeCollegues) {
-
-			if (collegue.getNom().equals(nomRecherche)) {
-				listeColleguesTrouves.add(collegue);
-			}
-
-		}
-		// on retourne ensuite la liste alimentée
-		return listeColleguesTrouves;
+		
+		List<Collegue> findByNom = pRepo.findByNom(nomRecherche); 
+		
+			return findByNom; 
+				
 
 	}
 
 	public Collegue rechercherParMatricule(String matriculeRecherche) throws Exception {
 
-		// on va simplement récupérer le matricule du collègue directement à travers le
-		// get
-
-		Collegue collegue1 = this.data.get(matriculeRecherche);
-		// lorsque le matricule est trouvé, on retourne notre collègue, sinon on génère
-		// une exception
-
-		if (collegue1 == null) {
-
-			throw new CollegueNonTrouveException("ce matricule n'existe pas");
-		} else {
-
-			return collegue1;
-		}
-
+		Optional<Collegue> one = pRepo.findByMatricule(matriculeRecherche);
+		
+		return one
+				.orElseThrow( ()->new CollegueNonTrouveException() );
+		
 	}
 
 	public Collegue sauvegarderCollegue(Collegue individu) {
@@ -92,7 +77,7 @@ public class CollegueService {
 				&& individu.getPhotoUrl().startsWith("http")
 				&& (LocalDate.now().getYear() - individu.getDateDeNaissance().getYear() > 18)) {
 			// ici j'obtiens mon individu qui a son matricule à jour
-			data.put(individu.getMatricule(), individu);
+				pRepo.save(individu); 
 			// important
 			return individu;
 		} else {
@@ -101,40 +86,27 @@ public class CollegueService {
 		}
 	}
 
-	public Collegue modifierEmail(String matricule, String email) {
+public Collegue modifierEmail(String matricule, String email) {
 		
-        //je récupère le collègue à partir de son matricule
-		Collegue collegue2 = this.data.get(matricule);
-		//dans quel cas le matricule de collègue peut valoir null lorsque le matricule fourni n'existe pas dans la clé de notre map. 
+		Optional<Collegue> collegueTrouve = pRepo.findByMatricule(matricule);
+	
+		Collegue c = collegueTrouve.orElseThrow(()-> new CollegueNonTrouveException()); 		
 		
-		if (collegue2 == null) {
-			
-			throw new CollegueInvalideException("le matricule ne correspond à aucun collègue"); 
-		}
-		
-		collegue2.setEmail(email); 
-		
-		return collegue2;
-		
+		c.setEmail(email);
+		return c;  	
 
 	}
 	
 public Collegue modifierPhoto(String matricule, String photoUrl) {
 		
-        //je récupère le collègue à partir de son matricule
-		Collegue collegue2 = this.data.get(matricule);
-		//dans quel cas le matricule de collègue peut valoir null lorsque le matricule fourni n'existe pas dans la clé de notre map. 
-		
-		if (collegue2 == null) {
-			
-			throw new CollegueInvalideException("le matricule ne correspond à aucun collègue"); 
-		}
-		
-		collegue2.setPhotoUrl(photoUrl);
-		
-		return collegue2;
-		
-
+	Optional<Collegue> collegueTrouv = pRepo.findByMatricule(matricule);
+	
+	Collegue col = collegueTrouv.orElseThrow(()-> new CollegueNonTrouveException()); 		
+	
+	col.setPhotoUrl(photoUrl);
+	return col;  
 	}
+
+
 
 }

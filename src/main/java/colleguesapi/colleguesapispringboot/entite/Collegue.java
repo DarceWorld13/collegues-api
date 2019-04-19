@@ -2,14 +2,27 @@ package colleguesapi.colleguesapispringboot.entite;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+
+@Entity
+@Table(name="Collegue")
 public class Collegue {
 	
-
+	@Id
     private String matricule;  
+    @Column(name = "nom")
     private String nom; 
+    @Column(name = "prenoms")
     private String prenoms; 
+    @Column(name = "email")
     private String email;
-    private LocalDate dateDeNaissance; 
+    @Column(name = "dateDENaissance")
+    private LocalDate dateDeNaissance;
+    @Column(name = "photoUrl")
     private String photoUrl;
   
     public Collegue ()
