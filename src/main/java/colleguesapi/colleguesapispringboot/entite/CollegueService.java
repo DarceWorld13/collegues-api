@@ -60,7 +60,7 @@ public class CollegueService {
 
 	public Collegue rechercherParMatricule(String matriculeRecherche) throws Exception {
 
-		Optional<Collegue> one = pRepo.findByMatricule(matriculeRecherche);
+		Optional<Collegue> one = pRepo.findByMatricule(matriculeRecherche); 
 		
 		return one
 				.orElseThrow( ()->new CollegueNonTrouveException() );
