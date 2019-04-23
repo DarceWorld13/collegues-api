@@ -129,22 +129,5 @@ public class CollegueServiceTest {
 		
 	}
 	
-	
-	
-	
-	
-	//TODO: test pour rechercherParMatricule()
-	
-	
-	//TODO: test pour modifierEmail()
-	
-	//TODO: test pour modifierPhotoUrl()
-	
-	
-	
-	
-	
-	
-	
 
 }
