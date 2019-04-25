@@ -25,24 +25,42 @@ public class StartupDataInit {
 	    @EventListener(ContextRefreshedEvent.class)
 	    public void init() {
 
-	       Collegue collegue1 = new Collegue(); 
-	       collegue1.setNom("dem");
-	       collegue1.setEmail("amadou@sfr.fr");
-	       collegue1.setMatricule("a32");
-	       collegue1.setDateDeNaissance(LocalDate.of(1998, Month.AUGUST, 03));
-	       collegue1.setPhotoUrl("http://facebook.com");
-	       collegue1.setPrenoms("amadou");
-	       
-	       Collegue collegue2 = new Collegue(); 
-	       collegue2.setMatricule("a34");
-	       collegue2.setNom("dupont");
-	       collegue2.setPrenoms("rené");
-	       collegue2.setEmail("dupont@sfr.fr");
-	       collegue2.setDateDeNaissance(LocalDate.of(1999, Month.JUNE, 3));
-	       collegue2.setPhotoUrl("http://tes.com");
-	       
-	       collegueRepo.save(collegue1); 
-	       collegueRepo.save(collegue2);
+	    	 Collegue dem = new Collegue(); 
+		       dem.setNom("dem");
+		       dem.setEmail("amadou@sfr.fr");
+		       dem.setMatricule("a32");
+		       dem.setDateDeNaissance(LocalDate.of(1998, Month.AUGUST, 03));
+		       dem.setPhotoUrl("http://facebook.com");
+		       dem.setPrenoms("amadou");
+		       
+		       Collegue tonyFerguson = new Collegue(); 
+		       tonyFerguson.setNom("Ferguson");
+		       tonyFerguson.setEmail("tony@sfr.fr");
+		       tonyFerguson.setMatricule("a30");
+		       tonyFerguson.setDateDeNaissance(LocalDate.of(2000, Month.DECEMBER, 28));
+		       tonyFerguson.setPhotoUrl("http://tonyferguson.com");
+		       tonyFerguson.setPrenoms("Tony");
+		       
+		       Collegue mcgregor = new Collegue(); 
+		       mcgregor.setNom("Mcgregor");
+		       mcgregor.setEmail("mcgregor@sfr.fr");
+		       mcgregor.setMatricule("a31");
+		       mcgregor.setDateDeNaissance(LocalDate.of(1988, Month.DECEMBER, 20));
+		       mcgregor.setPhotoUrl("http://mcgregor.com");
+		       mcgregor.setPrenoms("Conor");
+		       
+		       Collegue dupont = new Collegue(); 
+		       dupont.setMatricule("a33");
+		       dupont.setNom("dupont");
+		       dupont.setPrenoms("rené");
+		       dupont.setEmail("dupont@sfr.fr");
+		       dupont.setDateDeNaissance(LocalDate.of(1999, Month.JUNE, 3));
+		       dupont.setPhotoUrl("http://tes.com");
+		       
+		       collegueRepo.save(dem); 
+		       collegueRepo.save(tonyFerguson);
+		       collegueRepo.save(dupont); 
+		       collegueRepo.save(mcgregor); 
 	    	
 	    	
 	    	
