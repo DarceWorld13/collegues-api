@@ -30,11 +30,11 @@ public class StartupDataInit {
 		       dem.setEmail("amadou@sfr.fr");
 		       dem.setMatricule("a32");
 		       dem.setDateDeNaissance(LocalDate.of(1998, Month.AUGUST, 03));
-		       dem.setPhotoUrl("http://facebook.com");
+		       dem.setPhotoUrl("https://www.bjpenn.com/wp-content/uploads/2017/12/DCcry.jpg");
 		       dem.setPrenoms("amadou");
 		       
 		       Collegue tonyFerguson = new Collegue(); 
-		       tonyFerguson.setNom("Ferguson");
+		       tonyFerguson.setNom("dem");
 		       tonyFerguson.setEmail("tony@sfr.fr");
 		       tonyFerguson.setMatricule("a30");
 		       tonyFerguson.setDateDeNaissance(LocalDate.of(2000, Month.DECEMBER, 28));
@@ -42,7 +42,7 @@ public class StartupDataInit {
 		       tonyFerguson.setPrenoms("Tony");
 		       
 		       Collegue mcgregor = new Collegue(); 
-		       mcgregor.setNom("Mcgregor");
+		       mcgregor.setNom("mcgregor");
 		       mcgregor.setEmail("mcgregor@sfr.fr");
 		       mcgregor.setMatricule("a31");
 		       mcgregor.setDateDeNaissance(LocalDate.of(1988, Month.DECEMBER, 20));
