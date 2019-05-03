@@ -16,6 +16,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,11 +30,9 @@ import colleguesapi.colleguesapispringboot.interfaceI.CollegueRepository;
 @Service
 public class CollegueService {
 
-
-	// outils qui permet de communiquer avec une base de données relationnelle et les infos de la base se trouve dans application.properties
+	// outils qui permet de communiquer avec une base de données relationnelle et
+	// les infos de la base se trouve dans application.properties
 	CollegueRepository pRepo;
-	
-	
 
 	public CollegueRepository getpRepo() {
 		return pRepo;
@@ -43,28 +42,26 @@ public class CollegueService {
 		this.pRepo = pRepo;
 	}
 
-	@Autowired 
+	@Autowired
 	public CollegueService(CollegueRepository pRepo) {
 		super();
 		this.pRepo = pRepo;
 	}
 
 	public List<Collegue> rechercherParNom(String nomRecherche) {
-		
-		List<Collegue> findByNom = pRepo.findByNom(nomRecherche); 
-		
-			return findByNom; 
-				
+
+		List<Collegue> findByNom = pRepo.findByNom(nomRecherche);
+
+		return findByNom;
 
 	}
 
 	public Collegue rechercherParMatricule(String matriculeRecherche) throws Exception {
 
-		Optional<Collegue> one = pRepo.findByMatricule(matriculeRecherche); 
-		
-		return one
-				.orElseThrow( ()->new CollegueNonTrouveException() );
-		
+		Optional<Collegue> one = pRepo.findByMatricule(matriculeRecherche);
+
+		return one.orElseThrow(() -> new CollegueNonTrouveException());
+
 	}
 
 	public Collegue sauvegarderCollegue(Collegue individu) {
@@ -77,7 +74,7 @@ public class CollegueService {
 				&& individu.getPhotoUrl().startsWith("http")
 				&& (LocalDate.now().getYear() - individu.getDateDeNaissance().getYear() > 18)) {
 			// ici j'obtiens mon individu qui a son matricule à jour
-				pRepo.save(individu); 
+			pRepo.save(individu);
 			// important
 			return individu;
 		} else {
@@ -86,27 +83,27 @@ public class CollegueService {
 		}
 	}
 
-public Collegue modifierEmail(String matricule, String email) {
-		
+	@Transactional
+	public Collegue modifierEmail(String matricule, String email) {
+
 		Optional<Collegue> collegueTrouve = pRepo.findByMatricule(matricule);
-	
-		Collegue c = collegueTrouve.orElseThrow(()-> new CollegueNonTrouveException()); 		
-		
+
+		Collegue c = collegueTrouve.orElseThrow(() -> new CollegueNonTrouveException());
+
 		c.setEmail(email);
-		return c;  	
+		return c;
 
 	}
-	
-public Collegue modifierPhoto(String matricule, String photoUrl) {
-		
-	Optional<Collegue> collegueTrouv = pRepo.findByMatricule(matricule);
-	
-	Collegue col = collegueTrouv.orElseThrow(()-> new CollegueNonTrouveException()); 		
-	
-	col.setPhotoUrl(photoUrl);
-	return col;  
+
+	@Transactional
+	public Collegue modifierPhoto(String matricule, String photoUrl) {
+
+		Optional<Collegue> collegueTrouv = pRepo.findByMatricule(matricule);
+
+		Collegue col = collegueTrouv.orElseThrow(() -> new CollegueNonTrouveException());
+
+		col.setPhotoUrl(photoUrl);
+		return col;
 	}
-
-
 
 }
