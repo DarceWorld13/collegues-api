@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import colleguesapi.colleguesapispringboot.entite.Collegue;
 import colleguesapi.colleguesapispringboot.entite.CollegueAModifier;
+import colleguesapi.colleguesapispringboot.entite.CollegueAModifier2;
 import colleguesapi.colleguesapispringboot.entite.CollegueService;
 import colleguesapi.colleguesapispringboot.exception.CollegueInvalideException;
+import colleguesapi.colleguesapispringboot.interfaceI.CollegueRepository;
 
 @RestController
 @CrossOrigin
@@ -69,7 +71,7 @@ public class CollegueController {
 	    
 	 // Récupérer un objet Collègue au format JSON 
 	    
-	    @RequestMapping( method = RequestMethod.POST)
+	    @RequestMapping(method = RequestMethod.POST)
 	    public Collegue create(@RequestBody Collegue collegueAjouter) {
 	    	
 	    	
@@ -99,8 +101,33 @@ public class CollegueController {
 	     
 
 	   }
-	  
+
+	   
+	   
+	   
+	@RequestMapping( path = "/verif", method = RequestMethod.GET)
+    public boolean validationEmail(@RequestParam("email")  String email ) {
+		
+		 return colService.emailExistant(email); 
+	   }
+	
+	
+	
+	@RequestMapping( path = "/photos", method = RequestMethod.GET)
+	public List<CollegueAModifier2> toutesLesPhotos() {
+		
+		return colService.touverPhoto(); 
+		
+		
 	}
+	
+	
+	
+	   
+	   
+}
+	  
+	
 
 	
 	

@@ -34,19 +34,19 @@ public class StartupDataInit {
 		       dem.setPrenoms("amadou");
 		       
 		       Collegue tonyFerguson = new Collegue(); 
-		       tonyFerguson.setNom("dem");
-		       tonyFerguson.setEmail("tony@sfr.fr");
+		       tonyFerguson.setNom("johnny");
+		       tonyFerguson.setEmail("jonjones@jones.fr");
 		       tonyFerguson.setMatricule("a30");
 		       tonyFerguson.setDateDeNaissance(LocalDate.of(2000, Month.DECEMBER, 28));
-		       tonyFerguson.setPhotoUrl("http://tonyferguson.com");
-		       tonyFerguson.setPrenoms("Tony");
+		       tonyFerguson.setPhotoUrl("https://i.ytimg.com/vi/bdxP2pKRCPI/hqdefault.jpg");
+		       tonyFerguson.setPrenoms("Bones Jones");
 		       
 		       Collegue mcgregor = new Collegue(); 
 		       mcgregor.setNom("mcgregor");
 		       mcgregor.setEmail("mcgregor@sfr.fr");
 		       mcgregor.setMatricule("a31");
 		       mcgregor.setDateDeNaissance(LocalDate.of(1988, Month.DECEMBER, 20));
-		       mcgregor.setPhotoUrl("http://mcgregor.com");
+		       mcgregor.setPhotoUrl("https://i2-prod.mirror.co.uk/incoming/article7429038.ece/ALTERNATES/s1200/Conor-McGregor.jpg");
 		       mcgregor.setPrenoms("Conor");
 		       
 		       Collegue dupont = new Collegue(); 
@@ -55,7 +55,7 @@ public class StartupDataInit {
 		       dupont.setPrenoms("rené");
 		       dupont.setEmail("dupont@sfr.fr");
 		       dupont.setDateDeNaissance(LocalDate.of(1999, Month.JUNE, 3));
-		       dupont.setPhotoUrl("http://tes.com");
+		       dupont.setPhotoUrl("https://c.stocksy.com/a/Nhm800/z9/2093825.jpg?1550271847");
 		       
 		       collegueRepo.save(dem); 
 		       collegueRepo.save(tonyFerguson);

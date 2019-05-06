@@ -9,8 +9,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.hibernate.cfg.ExtendsQueueEntry;
+import org.hibernate.mapping.Array;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Component;
@@ -105,5 +107,24 @@ public class CollegueService {
 		col.setPhotoUrl(photoUrl);
 		return col;
 	}
+
+	public boolean emailExistant(String email) {
+		
+		return pRepo.findByEmail(email) != null;  
+		
+	}
+
+	public List<CollegueAModifier2>touverPhoto(){
+		
+		return pRepo.findAll()
+				.stream()
+				.map((collegue)->new CollegueAModifier2(collegue.getMatricule(), collegue.getPhotoUrl()) )
+				.collect(Collectors.toList()); 
+		
+	}
+	
+	
+	
+	
 
 }
