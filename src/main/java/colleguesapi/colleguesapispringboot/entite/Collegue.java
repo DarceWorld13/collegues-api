@@ -1,10 +1,14 @@
 package colleguesapi.colleguesapispringboot.entite;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -13,23 +17,38 @@ import javax.persistence.Table;
 public class Collegue {
 	
 	@Id
-    private String matricule;  
+    private String matricule; 
+	
     @Column(name = "nom")
     private String nom; 
     @Column(name = "prenoms")
     private String prenoms; 
     @Column(name = "email")
     private String email;
-    @Column(name = "dateDENaissance")
+    @Column(name = "dateDeNaissance")
     private LocalDate dateDeNaissance;
     @Column(name = "photoUrl")
     private String photoUrl;
+    
+    //relation entre commentsCollegue et collegue
+    @OneToMany(mappedBy="col")
+    private List<CommentsCollegue> col ;
+    
+    
   
-    public Collegue ()
+	public Collegue ()
     {
     	
     }
     
+	public List<CommentsCollegue> getCol() {
+		return col;
+	}
+
+	public void setCol(List<CommentsCollegue> col) {
+		this.col = col;
+	}
+
 	public Collegue(String matricule, String nom, String prenoms, String email, LocalDate dateDeNaissance,
 			String photoUrl) {
 		super();

@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import colleguesapi.colleguesapispringboot.entite.Collegue;
+import colleguesapi.colleguesapispringboot.entite.CommentsCollegue;
 
 public interface CollegueRepository extends JpaRepository<Collegue, String> {
 	
@@ -17,8 +18,12 @@ public interface CollegueRepository extends JpaRepository<Collegue, String> {
 	Optional<Collegue> findByMatricule(String matricule);
 	
 	@Query("select c from Collegue c where c.email = :email")
-	Collegue findByEmail(@Param("email") String email); 
-	
+	Collegue findByEmail(@Param("email") String email);
+
+
+
+
+	 
 	
 
 	

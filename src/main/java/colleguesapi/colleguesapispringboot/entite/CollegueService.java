@@ -1,31 +1,21 @@
 package colleguesapi.colleguesapispringboot.entite;
 
 import java.time.LocalDate;
-import java.time.Month;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import org.hibernate.cfg.ExtendsQueueEntry;
-import org.hibernate.mapping.Array;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import colleguesapi.colleguesapispringboot.exception.CollegueInvalideException;
 import colleguesapi.colleguesapispringboot.exception.CollegueNonTrouveException;
 import colleguesapi.colleguesapispringboot.interfaceI.CollegueRepository;
+import colleguesapi.colleguesapispringboot.interfaceI.CommentRepository;
 
 //transformant en spring bean
 
@@ -35,6 +25,8 @@ public class CollegueService {
 	// outils qui permet de communiquer avec une base de données relationnelle et
 	// les infos de la base se trouve dans application.properties
 	CollegueRepository pRepo;
+	
+
 
 	public CollegueRepository getpRepo() {
 		return pRepo;
@@ -122,9 +114,7 @@ public class CollegueService {
 				.collect(Collectors.toList()); 
 		
 	}
-	
-	
-	
+
 	
 
 }
