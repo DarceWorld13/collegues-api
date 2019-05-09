@@ -1,8 +1,6 @@
 package colleguesapi.colleguesapispringboot.entite;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -15,18 +13,12 @@ import org.springframework.transaction.annotation.Transactional;
 import colleguesapi.colleguesapispringboot.exception.CollegueInvalideException;
 import colleguesapi.colleguesapispringboot.exception.CollegueNonTrouveException;
 import colleguesapi.colleguesapispringboot.interfaceI.CollegueRepository;
-import colleguesapi.colleguesapispringboot.interfaceI.CommentRepository;
 
-//transformant en spring bean
 
 @Service
 public class CollegueService {
 
-	// outils qui permet de communiquer avec une base de données relationnelle et
-	// les infos de la base se trouve dans application.properties
 	CollegueRepository pRepo;
-	
-
 
 	public CollegueRepository getpRepo() {
 		return pRepo;

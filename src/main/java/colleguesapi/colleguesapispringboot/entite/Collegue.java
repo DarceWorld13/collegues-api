@@ -30,9 +30,6 @@ public class Collegue {
     @Column(name = "photoUrl")
     private String photoUrl;
     
-    //relation entre commentsCollegue et collegue
-    @OneToMany(mappedBy="col")
-    private List<CommentsCollegue> col ;
     
     
   
@@ -41,13 +38,6 @@ public class Collegue {
     	
     }
     
-	public List<CommentsCollegue> getCol() {
-		return col;
-	}
-
-	public void setCol(List<CommentsCollegue> col) {
-		this.col = col;
-	}
 
 	public Collegue(String matricule, String nom, String prenoms, String email, LocalDate dateDeNaissance,
 			String photoUrl) {

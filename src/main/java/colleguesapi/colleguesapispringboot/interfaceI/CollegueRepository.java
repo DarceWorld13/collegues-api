@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import colleguesapi.colleguesapispringboot.entite.Collegue;
-import colleguesapi.colleguesapispringboot.entite.CommentsCollegue;
 
 public interface CollegueRepository extends JpaRepository<Collegue, String> {
 	

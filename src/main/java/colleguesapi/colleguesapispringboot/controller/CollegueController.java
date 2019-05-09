@@ -1,6 +1,5 @@
 package colleguesapi.colleguesapispringboot.controller;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,8 +16,6 @@ import colleguesapi.colleguesapispringboot.entite.Collegue;
 import colleguesapi.colleguesapispringboot.entite.CollegueAModifier;
 import colleguesapi.colleguesapispringboot.entite.CollegueAModifier2;
 import colleguesapi.colleguesapispringboot.entite.CollegueService;
-import colleguesapi.colleguesapispringboot.entite.CommentService;
-import colleguesapi.colleguesapispringboot.entite.CommentsCollegue;
 import colleguesapi.colleguesapispringboot.exception.CollegueInvalideException;
 
 @RestController
@@ -29,8 +26,6 @@ public class CollegueController {
 	@Autowired
 	private CollegueService colService; 
 	
-	@Autowired
-	private CommentService comService; 
 
 	@RequestMapping(method = RequestMethod.GET)
 	public List<String> trouverNom(@RequestParam("nom") String nomSaisiDansRequete) {
@@ -99,21 +94,6 @@ public class CollegueController {
 		
 		return colService.touverPhoto(); 
 	}
-	
-	
-	/*@RequestMapping(path = "/{matricule}", method = RequestMethod.POST)
-    public CommentsCollegue sauvegarderCommentaire(@PathVariable String matricule, @RequestBody String c) {
-		
-		return comService.ajouterCommentaire(matricule, c);
-		
-	}
-	
-	pour pouvoir ajouter des commentaires en base de données 
-	*/
-
-	    
-	
-	
 	   
 	   
 }
