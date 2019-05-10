@@ -28,11 +28,14 @@ public class CollegueService {
 		this.pRepo = pRepo;
 	}
 
+	
 	@Autowired
 	public CollegueService(CollegueRepository pRepo) {
 		super();
 		this.pRepo = pRepo;
 	}
+	
+	
 
 	public List<Collegue> rechercherParNom(String nomRecherche) {
 
@@ -94,7 +97,7 @@ public class CollegueService {
 
 	public boolean emailExistant(String email) {
 		
-		return pRepo.findByEmail(email) != null;  
+		return pRepo.findByEmails(email) != null;  
 		
 	}
 
@@ -106,6 +109,17 @@ public class CollegueService {
 				.collect(Collectors.toList()); 
 		
 	}
+	
+	public Collegue recupColParEmail(String email) {
+		
+		Optional<Collegue> collegueTrouv = pRepo.findByEmail(email); 
+		
+		Collegue col = collegueTrouv.orElseThrow(() -> new CollegueNonTrouveException());
+		
+		return col; 
+		
+	}
+	
 
 	
 

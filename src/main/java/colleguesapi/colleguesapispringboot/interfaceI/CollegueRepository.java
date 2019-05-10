@@ -17,7 +17,10 @@ public interface CollegueRepository extends JpaRepository<Collegue, String> {
 	Optional<Collegue> findByMatricule(String matricule);
 	
 	@Query("select c from Collegue c where c.email = :email")
-	Collegue findByEmail(@Param("email") String email);
+	Collegue findByEmails(@Param("email") String email);
+	
+	
+	Optional<Collegue> findByEmail(String email); 
 
 
 

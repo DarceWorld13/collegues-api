@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,6 +29,8 @@ public class CollegueController {
 	private CollegueService colService; 
 	
 
+	
+	@Secured("ROLE_USER")
 	@RequestMapping(method = RequestMethod.GET)
 	public List<String> trouverNom(@RequestParam("nom") String nomSaisiDansRequete) {
 		
@@ -44,6 +48,7 @@ public class CollegueController {
 				
     }
 	
+		@Secured("ROLE_USER")
 	    @RequestMapping(path = "/{matricule}", method = RequestMethod.GET)
 	    public Collegue trouverMatricule(@PathVariable String matricule) throws Exception {
 	    	
@@ -53,7 +58,8 @@ public class CollegueController {
 	    
 	    }
 	    
-	    
+	 	
+	@Secured("ROLE_ADMIN")
 	    @RequestMapping(method = RequestMethod.POST)
 	    public Collegue create(@RequestBody Collegue collegueAjouter) {
 	    	
@@ -64,7 +70,7 @@ public class CollegueController {
 	    
 	    }
 	    
-
+	@Secured("ROLE_ADMIN")
 	   @RequestMapping(path = "/{matricule}", method = RequestMethod.PATCH)
 	    public Collegue modifierEmailPhoto(@PathVariable String matricule, @RequestBody CollegueAModifier c) {
 	    	
@@ -83,19 +89,21 @@ public class CollegueController {
 
 	   }
 
+	@Secured("ROLE_USER")
 	@RequestMapping( path = "/verif", method = RequestMethod.GET)
     public boolean validationEmail(@RequestParam("email")  String email ) {
 		
 		 return colService.emailExistant(email); 
 	   }
 	
+	@Secured("ROLE_USER")
 	@RequestMapping( path = "/photos", method = RequestMethod.GET)
 	public List<CollegueAModifier2> toutesLesPhotos() {
 		
 		return colService.touverPhoto(); 
 	}
-	   
-	   
+	
+		   
 }
 	  
 	
